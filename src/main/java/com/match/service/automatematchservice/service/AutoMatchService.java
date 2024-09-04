@@ -15,7 +15,7 @@ public class AutoMatchService {
     private AutoMatchJsonProcessor autoMatchJsonProcessor;
 
     public ResponseEntity<AutoMatchFirstResponse> processRequest(JsonDataContract jsonDataContract) throws Exception {
-        autoMatchExcelProcessor.readExcelFile("matchExcel");
+        autoMatchExcelProcessor.readExcelFile("matchExcel.xlsx");
 
         return null;
     }

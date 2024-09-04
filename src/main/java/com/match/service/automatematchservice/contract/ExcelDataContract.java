@@ -2,6 +2,8 @@ package com.match.service.automatematchservice.contract;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class ExcelDataContract {
     private String ani;

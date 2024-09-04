@@ -1,9 +1,11 @@
 package com.match.service.automatematchservice.processor;
 
 import com.match.service.automatematchservice.contract.ExcelDataContract;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
@@ -20,24 +22,52 @@ public class AutoMatchExcelProcessor {
     public List<ExcelDataContract> readExcelFile(String fileName) throws Exception {
         Path jarDir = Paths.get(System.getProperty("user.dir"));  // Get the directory where the JAR file is located
         File excelFile = new File(jarDir.toFile(), fileName);      // Excel file path relative to the JAR
-
+        List<ExcelDataContract> dataContracts = new ArrayList<>();
         try (InputStream fileStream = new FileInputStream(excelFile);
              Workbook workbook = new XSSFWorkbook(fileStream)) {
 
-            List<ExcelDataContract> dataRows = new ArrayList<>();
+            List<String> headers = new ArrayList<>();
             Sheet sheet = workbook.getSheetAt(0);
 
-            for (Row row : sheet) {
-                ExcelDataContract dataRow = new ExcelDataContract();
-                dataRow.setAni(row.getCell(0).getStringCellValue());
-                dataRow.setAccountNumber(row.getCell(1).getStringCellValue());
-                dataRow.setSys(row.getCell(2).getStringCellValue());
-                dataRow.setPrn(row.getCell(3).getStringCellValue());
-                dataRow.setAgent(row.getCell(4).getStringCellValue());
-                dataRows.add(dataRow);
-            }
+            for (int i = 0; i <= sheet.getLastRowNum(); i++) {
+                Row currentRow = sheet.getRow(i);
 
-            return dataRows;
+                // If it's the first row, extract headers
+                if (i == 0) {
+                    for (Cell cell : currentRow) {
+                        headers.add(cell.getStringCellValue());
+                    }
+                } else {
+                    ExcelDataContract dataContract = new ExcelDataContract();
+
+                    for (Cell cell : currentRow) {
+                        int columnIndex = cell.getColumnIndex();
+                        String cellValue = ((XSSFCell) cell).getRawValue();
+
+                        switch (headers.get(columnIndex)) {
+                            case "ANI":
+                                dataContract.setAni(cellValue);
+                                break;
+                            case "Account Number":
+                                dataContract.setAccountNumber(cellValue);
+                                break;
+                            case "Sys":
+                                dataContract.setSys(cellValue);
+                                break;
+                            case "PRN":
+                                dataContract.setPrn(cellValue);
+                                break;
+                            case "Agent":
+                                dataContract.setAgent(cellValue);
+                                break;
+                        }
+                    }
+                    dataContracts.add(dataContract);
+                }
+
+
+            }
         }
+        return dataContracts;
     }
 }
