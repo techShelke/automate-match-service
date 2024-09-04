@@ -14,7 +14,7 @@ Sys 				9356
 PRN					1200
 Agent				9000
 STEP 1: RUN THE EDL INSERT API
-URL: https://edlpayfoneupsertservice-qa.app.dev2.dal.pcf.syfbank.com/payfoneupsert/insertPayfoneRecord
+URL: https://xyz.com/payfoneupsert/insertPayfoneRecord
 REPLACE ANI from excel with phonenumber
 REPLACE Account Number form excel with accountnumber
 REPLACE SYS,PRN, Agent with sys, prn, agent from excel
@@ -99,7 +99,7 @@ In most cases it should be success,still go to step 2 and make sure this details
 Step 2: Run the GET Details API to cross verify if the insert happened fine.
 
 REPLACE the phone number with the one received in request ANI
-URL: https://edlpayfonedataservice.app.qa.pcf.syfbank.com/payfonedata/getDetailsByPhoneNumber
+URL: https://abc.com/payfonedata/getDetailsByPhoneNumber
 
 Request:
 {
@@ -132,7 +132,7 @@ SELECT * FROM rubptyqa01.lookup_s where sys= '9356 [this is coming from excel sh
 
 Step 4:Pay Phone Applicator API to capture
 
-https://payfoneapplicatorservice-v2-uat.app.dev.use1.pcf.syfbank.com/ANIMatchRestSvc/V2/fetchANI
+https://efg.com/ANIMatchRestSvc/V2/fetchANI
 
 Request:
 {
