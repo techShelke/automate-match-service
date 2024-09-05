@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class PayPhoneServiceCaller {
-@Autowired
+    @Autowired
     private RestTemplate restTemplate;
 
     @Value("${service.endpoint.url}")
@@ -21,22 +21,20 @@ public class PayPhoneServiceCaller {
 
     public AutoMatchFirstResponse insertRecord(JsonDataContract request) {
 
-            // Set headers if required
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("Content-Type", "application/json");
+        // Set headers if required
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
 
-            HttpEntity<JsonDataContract> requestEntity = new HttpEntity<>(request, headers);
+        HttpEntity<JsonDataContract> requestEntity = new HttpEntity<>(request, headers);
 
-            // Make the REST call
-            ResponseEntity<AutoMatchFirstResponse> responseEntity = restTemplate.exchange(
-                    serviceEndpointUrl,
-                    HttpMethod.POST,
-                    requestEntity,
-                    AutoMatchFirstResponse.class
-            );
-            return responseEntity.getBody();
-
-
+        // Make the REST call
+        ResponseEntity<AutoMatchFirstResponse> responseEntity = restTemplate.exchange(
+                serviceEndpointUrl,
+                HttpMethod.POST,
+                requestEntity,
+                AutoMatchFirstResponse.class
+        );
+        return responseEntity.getBody();
 
 
     }
