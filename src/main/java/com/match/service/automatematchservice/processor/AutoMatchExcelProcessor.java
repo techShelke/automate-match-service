@@ -7,6 +7,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -17,7 +18,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Component
 public class AutoMatchExcelProcessor {
     public List<ExcelDataContract> readExcelFile(String fileName) throws Exception {
         Path jarDir = Paths.get(System.getProperty("user.dir"));  // Get the directory where the JAR file is located

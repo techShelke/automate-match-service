@@ -27,7 +27,7 @@ public class JsonDataContractInnerRequest {
     private String verified;
 
     @JsonProperty("payfoneid")
-    private UUID payfoneId;
+    private String payfoneId;
 
     @JsonProperty("linetype")
     private String lineType;
