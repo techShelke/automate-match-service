@@ -2,6 +2,7 @@ package com.match.service.automatematchservice.processor;
 
 import com.match.service.automatematchservice.contract.AutoMatchFirstResponse;
 import com.match.service.automatematchservice.contract.JsonDataContract;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -12,8 +13,8 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class PayPhoneServiceCaller {
-
-    private RestTemplate restTemplate = new RestTemplate();
+@Autowired
+    private RestTemplate restTemplate;
 
     @Value("${service.endpoint.url}")
     private String serviceEndpointUrl;

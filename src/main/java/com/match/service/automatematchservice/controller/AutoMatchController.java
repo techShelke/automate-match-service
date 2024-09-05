@@ -1,3 +1,4 @@
+/*
 package com.match.service.automatematchservice.controller;
 
 import com.match.service.automatematchservice.contract.AutoMatchFirstResponse;
@@ -26,3 +27,4 @@ public class AutoMatchController {
 
     }
 }
+*/

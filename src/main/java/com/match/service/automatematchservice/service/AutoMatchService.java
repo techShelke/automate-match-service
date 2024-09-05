@@ -12,26 +12,24 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 
 @Service
 public class AutoMatchService {
-  //  @Autowired
-    private AutoMatchExcelProcessor autoMatchExcelProcessor = new AutoMatchExcelProcessor();
-  //  @Autowired
-    private AutoMatchJsonProcessor autoMatchJsonProcessor = new AutoMatchJsonProcessor();
-   // @Autowired
-    private PayPhoneServiceCaller payPhoneServiceCaller = new PayPhoneServiceCaller();
+    @Autowired
+    private AutoMatchExcelProcessor autoMatchExcelProcessor;// = new AutoMatchExcelProcessor();
+    @Autowired
+    private AutoMatchJsonProcessor autoMatchJsonProcessor;//  = new AutoMatchJsonProcessor();
+    @Autowired
+    private PayPhoneServiceCaller payPhoneServiceCaller ;// = new PayPhoneServiceCaller();
 
-    public ResponseEntity<AutoMatchFirstResponse> processRequest() throws Exception {
+    public ResponseEntity<AutoMatchFirstResponse> processRequest(File jsonFile, File excelFile) throws Exception {
         AutoMatchFirstResponse response = null;
-        List<ExcelDataContract> excelDataContracts = autoMatchExcelProcessor.readExcelFile("matchExcel.xlsx");
+        List<ExcelDataContract> excelDataContracts = autoMatchExcelProcessor.readExcelFile(excelFile);
         ObjectMapper objectMapper = new ObjectMapper();
-        ClassPathResource resource = new ClassPathResource("templates/contract.json");
-        InputStream inputStream = resource.getInputStream();
-
-        JsonDataContract jsonDataContract = objectMapper.readValue(inputStream, JsonDataContract.class);
+        JsonDataContract jsonDataContract = objectMapper.readValue(jsonFile, JsonDataContract.class);
 
         List<JsonDataContract> requestContracts = autoMatchJsonProcessor.createRequestJsons(jsonDataContract, excelDataContracts);
         for (JsonDataContract request : requestContracts) {
@@ -41,4 +39,6 @@ public class AutoMatchService {
 
         return ResponseEntity.ok(response);
     }
+
+
 }

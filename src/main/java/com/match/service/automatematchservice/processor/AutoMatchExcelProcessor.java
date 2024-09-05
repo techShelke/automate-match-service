@@ -20,9 +20,7 @@ import java.util.List;
 
 @Component
 public class AutoMatchExcelProcessor {
-    public List<ExcelDataContract> readExcelFile(String fileName) throws Exception {
-        Path jarDir = Paths.get(System.getProperty("user.dir"));  // Get the directory where the JAR file is located
-        File excelFile = new File(jarDir.toFile(), fileName);      // Excel file path relative to the JAR
+    public List<ExcelDataContract> readExcelFile(File excelFile) throws Exception {
         List<ExcelDataContract> dataContracts = new ArrayList<>();
         try (InputStream fileStream = new FileInputStream(excelFile);
              Workbook workbook = new XSSFWorkbook(fileStream)) {
