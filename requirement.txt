@@ -129,6 +129,16 @@ Step 3:Go to the data base and run the below queries
 Login to Data base: to check the lookup ID by using the below queries
 SELECT * FROM rubptyqa01.lookup_s where sys= '9356 [this is coming from excel sheet sys param]
 
+CREATE TABLE "lookup_s" (
+  "lookup_s_key" int NOT NULL AUTO_INCREMENT,
+  "lookup_id" varchar(15) COLLATE utf8mb3_unicode_ci NOT NULL,
+  "sys" varchar(4) COLLATE utf8mb3_unicode_ci NOT NULL,
+  "load_datetime" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY ("lookup_s_key"),
+  UNIQUE KEY "lookup_id" ("lookup_id", "sys"),
+  KEY "l_s" ("sys")
+);
+
 
 Step 4:Pay Phone Applicator API to capture
 

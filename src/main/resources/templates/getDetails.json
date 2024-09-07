@@ -1,0 +1,17 @@
+{
+  "transld": "TestPCCBENROLL3",
+  "eventName": "PayfoneDataService.JavaAPI.Read",
+  "eventTimestamp": "2021-03-25T10:04:08.015",
+  "serverName": "10.245.345",
+  "requestMetadata": {
+    "version": {
+      "major": "001",
+      "minor": "002",
+      "patch": "0500",
+      "versionDate": "2021-03-27T15:55:42-04:00"
+    }
+  },
+  "request": {
+    "phonenumber": ""
+  }
+}
